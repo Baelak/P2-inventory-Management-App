@@ -1,0 +1,11 @@
+{{!-- Extending from the main layout --}}
+{{#extend 'main'}}
+    {{#content 'body'}}
+        <section id="welcome">
+            <h2>Welcome to KYM Inventory Management</h2>
+            <p>Please log in to access your inventory or sign up to create an account.</p>
+            <a href="/login">Log In</a>
+            <a href="/signup">Sign Up</a>
+        </section>
+    {{/content}}
+{{/extend}}

@@ -1,0 +1,23 @@
+{{#extend 'main'}}
+    {{#content 'body'}}
+        <section id="project-management">
+            <h2>Manage Your Inventory</h2>
+            <div>
+                <a href="/add-category">Add Category</a>
+                <a href="/add-tag">Add Tag</a>
+                <a href="/add-product">Add Product</a>
+                <a href="/inventory">View Inventory</a>
+            </div>
+
+            <form id="add-item-form">
+                <label for="item-id">ID:</label>
+                <input type="text" id="item-id" name="id">
+
+                <label for="item-name">Name:</label>
+                <input type="text" id="item-name" name="name">
+
+                <button type="submit">Add Item</button>
+            </form>
+        </section>
+    {{/content}}
+{{/extend}}

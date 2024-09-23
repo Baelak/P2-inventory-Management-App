@@ -7,7 +7,6 @@ ProductTag.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
@@ -17,7 +16,7 @@ ProductTag.init(
         model: 'product',
         key: 'id',
       },
-      onDelete: 'CASCADE',  // Add cascade delete for product
+      onDelete: 'CASCADE', // Cascade delete
     },
     tag_id: {
       type: DataTypes.INTEGER,
@@ -25,14 +24,12 @@ ProductTag.init(
         model: 'tag',
         key: 'id',
       },
-      onDelete: 'CASCADE',  // Add cascade delete for tag
+      onDelete: 'CASCADE', // Cascade delete
     },
   },
   {
     sequelize,
     timestamps: false,
-    freezeTableName: true,
-    underscored: true,
     modelName: 'product_tag',
   }
 );

@@ -1,0 +1,14 @@
+{{#extend 'main'}}
+    {{#content 'body'}}
+        <section id="profile">
+            <h2>Welcome, {{user.username}}!</h2>
+            <p>Email: {{user.email}}</p>
+            
+            <h3>Manage Inventory</h3>
+            <a href="/inventory">View Inventory</a>
+            <a href="/add-category">Add Category</a>
+            <a href="/add-product">Add Product</a>
+            <a href="/add-tag">Add Tag</a>
+        </section>
+    {{/content}}
+{{/extend}}

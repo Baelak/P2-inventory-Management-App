@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
       await ProductTag.bulkCreate(productTagArr);
     }
 
-    res.status(200).json({ message: 'Product has been created 😄', product });
+    res.status(201).json({ message: 'Product has been created 😄', product });
   } catch (err) {
     res.status(400).json({ message: 'Error creating product 😅', error: err });
   }
@@ -75,7 +75,7 @@ router.put('/:id', async (req, res) => {
       ProductTag.bulkCreate(newProductTags),
     ]);
 
-    res.status(200).json({ message: 'Product has been updated 😄'});
+    res.status(200).json({ message: 'Product has been updated 😄' });
   } catch (err) {
     res.status(400).json({ message: 'Error updating product 🫠', error: err });
   }

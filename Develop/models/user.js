@@ -1,25 +1,33 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Tag extends Model {}
+class User extends Model {}
 
-Tag.init(
+User.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    tag_name: {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     sequelize,
-    timestamps: false,
-    modelName: 'tag',
+    modelName: 'user',
   }
 );
 
-module.exports = Tag;
+module.exports = User;
