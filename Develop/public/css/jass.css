@@ -40,8 +40,9 @@ button {
     background: #35424a;
     color: white;
     cursor: pointer;
+    text-decoration: none;
 }
 
 button:hover {
-    background: #444;
+    background: #6d6d6d;
 }

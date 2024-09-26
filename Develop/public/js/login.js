@@ -1,18 +1,19 @@
-const loginFormHandler = async (event) => {
+document.addEventListener('DOMContentLoaded', () => {
+  const loginFormHandler = async (event) => {
     event.preventDefault();
-  
+
     // Collect values from the login form
     const email = document.querySelector('#email-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
-  
+
     if (email && password) {
       // Send a POST request to the login route
-      const response = await fetch('/api/users/login', {
+      const response = await fetch('/api/users2/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },
       });
-  
+
       if (response.ok) {
         // Redirect to the homepage after a successful login
         document.location.replace('/');
@@ -21,6 +22,9 @@ const loginFormHandler = async (event) => {
       }
     }
   };
-  
-  document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
-  
+
+  const loginForm = document.querySelector('.login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', loginFormHandler);
+  }
+});

@@ -1,14 +1,11 @@
-{{#extend 'main'}}
-    {{#content 'body'}}
+{{!-- Profile Page Template --}}
         <section id="profile">
-            <h2>Welcome, {{user.username}}!</h2>
+            <h2>Welcome, {{User.username}}!</h2>
             <p>Email: {{user.email}}</p>
-            
+            <br>
             <h3>Manage Inventory</h3>
-            <a href="/inventory">View Inventory</a>
-            <a href="/add-category">Add Category</a>
-            <a href="/add-product">Add Product</a>
-            <a href="/add-tag">Add Tag</a>
+            <button><a href="/inventory">View Inventory</a></button>
+            <button><a href="/add-category">Add Category</a></button>
+            <button><a href="/add-product">Add Product</a></button>
+            <button><a href="/add-tag">Add Tag</a></button>
         </section>
-    {{/content}}
-{{/extend}}

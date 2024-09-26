@@ -10,6 +10,9 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the body covers full viewport height */
 }
 
 /* Header styles */
@@ -33,6 +36,7 @@ nav a:hover {
 /* Main content styles */
 main {
     padding: 20px;
+    flex: 1; /* Allows main content to grow and take up available space */
 }
 
 /* Footer styles */
@@ -41,7 +45,5 @@ footer {
     padding: 1rem 0;
     background: #35424a;
     color: #ffffff;
-    position: relative;
-    bottom: 0;
     width: 100%;
 }
