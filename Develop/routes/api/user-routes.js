@@ -14,19 +14,47 @@ router.get('/', async (req, res) => {
 });
 
 // get user for login
-router.post('/login', async (req, res) => {
-    const { email, password} = req.body;
-    try {
-      const user = await User.findOne({ where: {email}});
+// router.post('/login', async (req, res) => {
+//     const { email, password} = req.body;
+//     try {
+//       const user = await User.findOne({ where: {email}});
 
-      if(!user || user.password != password) {
-        return res.status(401).json({message: "Invalid credentials"});
-      }
-      res.status(200).json(user);
-    }catch (err) {
-      res.status(500).json({message:'Uh oh! That did not work 😅', error: err});
+//       if(!user || user.password != password) {
+//         return res.status(401).json({message: "Invalid credentials"});
+//       }
+//       res.status(200).json(user);
+//     }catch (err) {
+//       res.status(500).json({message:'Uh oh! That did not work 😅', error: err});
+//     }
+//   });
+
+router.post('/login', async (req, res) => {
+  console.log("hello")
+  try {
+    const userData = await User.findOne({ where: { email: req.body.email } });
+
+    if (!userData) {
+      res.status(400).json({ message: 'Incorrect email or password 😅, please try again' });
+      return;
     }
-  });
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: 'Incorrect email or password 😅, please try again' });
+      return;
+    }
+    console.log(userData)
+    req.session.save(() => {
+      req.session.userId = userData.id;
+      req.session.loggedIn = true;
+
+      res.json({ user: userData, message: 'You are now logged in! 😄' });
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 //get ONE USER BY ID
 router.get('/:id', async (req, res) => {

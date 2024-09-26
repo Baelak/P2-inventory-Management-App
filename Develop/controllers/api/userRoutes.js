@@ -3,6 +3,7 @@ const { User } = require('../../models');
 
 // User login
 router.post('/login', async (req, res) => {
+  console.log("hello")
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
@@ -17,7 +18,7 @@ router.post('/login', async (req, res) => {
       res.status(400).json({ message: 'Incorrect email or password 😅, please try again' });
       return;
     }
-
+    console.log(userData)
     req.session.save(() => {
       req.session.userId = userData.id;
       req.session.loggedIn = true;

@@ -8,13 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (email && password) {
       // Send a POST request to the login route
-      const response = await fetch('/api/users2/login', {
+      const response = await fetch('/api/users/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },
       });
 
       if (response.ok) {
+        const data = await response.json();
+        const userData = {
+          username: data.username,
+          email: data.email
+        }
+
+        localStorage.setItem("user", JSON.stringify(userData));
         // Redirect to the homepage after a successful login
         document.location.replace('/');
       } else {
