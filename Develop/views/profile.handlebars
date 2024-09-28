@@ -1,6 +1,6 @@
 {{!-- Profile Page Template --}}
 <section id="profile">
-
+    {{#if loggedIn}}
     <h2>Welcome, {{username}}!</h2>
     <p>Email: {{email}}</p>
     <br>
@@ -9,5 +9,5 @@
     <button><a href="/add-category">Add Category</a></button>
     <button><a href="/add-product">Add Product</a></button>
     <button><a href="/add-tag">Add Tag</a></button>
-
+    {{/if}}
 </section>
