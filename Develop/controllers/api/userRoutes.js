@@ -1,29 +1,30 @@
-const router = require('express').Router();
-const { User } = require('../../models');
+const User = require("../../models/User");
+
+const router = require("express").Router();
 
 // User login
-router.post('/login', async (req, res) => {
-  console.log("hello")
+router.post("/login", async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-
     if (!userData) {
-      res.status(400).json({ message: 'Incorrect email or password 😅, please try again' });
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password 😅, please try again" });
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
-
-    if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect email or password 😅, please try again' });
+    if (req.body.password != userData.password) {
+      res
+        .status(400)
+        .json({ message: "Incorrect password 😅, please try again" });
       return;
     }
-    console.log(userData)
     req.session.save(() => {
       req.session.userId = userData.id;
       req.session.loggedIn = true;
-
-      res.json({ user: userData, message: 'You are now logged in! 😄' });
+      req.session.username = userData.username;
+      res.redirect("/profile");
+      // res.json({ user: userData, message: 'You are now logged in! 😄' });
     });
   } catch (err) {
     res.status(400).json(err);
@@ -31,22 +32,30 @@ router.post('/login', async (req, res) => {
 });
 
 // User signup
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
-    const newUser = await User.create(req.body);
+    const newUser = await User.create({
+      username: req.body.name, // Assuming you have a field for name
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    // Save user ID and loggedIn state in session
     req.session.save(() => {
       req.session.userId = newUser.id;
       req.session.loggedIn = true;
-
-      res.status(200).json(newUser);
+      req.session.username = newUser.username;
+      res.redirect("/");
+      // res.status(201).json({ user: newUser, message: 'You have successfully signed up! 🎉' });
     });
   } catch (err) {
-    res.status(400).json(err);
+    console.error(err); // Debugging line
+    res.status(400).json({ message: "Failed to sign up, please try again." });
   }
 });
 
 // User logout
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
