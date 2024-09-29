@@ -85,7 +85,7 @@ This project is graded based on the following criteria:
 * The URL of the deployed application.
 * The URL of the GitHub repository, with a unique name and a README describing the project.
 
-### How to Submit Your Interactive Full-Stack Project
+## How to Submit Your Interactive Full-Stack Project
 **Each member of your group** is required to submit the following for review:
 
 * The URL of the deployed application.
