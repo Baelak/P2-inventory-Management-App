@@ -3,7 +3,7 @@
 const router = require("express").Router();
 
 const { Category, Product, Tag } = require("../models");
-const User = require("../models/User");
+const User = require("../models/user");
 // const User = require('../models/User');
 const withAuth = require("../utils/auth"); // Middleware to protect certain routes
 
