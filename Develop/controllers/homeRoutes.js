@@ -35,27 +35,6 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// POST route for signing up
-// router.post('/api/users/signup', async (req, res) => {
-//   try {
-//     const newUser = await User.create({
-//       username: req.body.name, // Assuming you have a field for name
-//       email: req.body.email,
-//       password: req.body.password,
-//     });
-
-//     // Save user ID and loggedIn state in session
-//     req.session.save(() => {
-//       req.session.userId = newUser.id;
-//       req.session.loggedIn = true;
-
-//       res.status(201).json({ user: newUser, message: 'You have successfully signed up! 🎉' });
-//     });
-//   } catch (err) {
-//     console.error(err); // Debugging line
-//     res.status(400).json({ message: 'Failed to sign up, please try again.' });
-//   }
-// });
 
 // GET all categories, products, and tags for inventory display
 router.get("/inventory", async (req, res) => {
@@ -85,6 +64,22 @@ router.get("/add-category", async (req, res) => {
   }
 });
 
+router.get("/add-product", async (req, res) => {
+  try {
+    res.render("product", {
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+// Route to render the form for adding a new tag
+router.get('/add-tag', (req, res) => {
+  res.render('tag', { loggedIn: req.session.loggedIn });
+});
+
 // Profile page route (protected by authentication middleware)
 router.get("/profile", withAuth, async (req, res) => {
   try {
@@ -110,7 +105,6 @@ router.get("/profile", withAuth, async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Failed to load profile" });
   }
-  res.render("profile", { loggedIn: req.session?.loggedIn });
 });
 
 module.exports = router;
